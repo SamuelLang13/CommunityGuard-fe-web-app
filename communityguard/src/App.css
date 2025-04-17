@@ -5,38 +5,101 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+input,
+textarea {
+  margin-bottom: 1rem; /* Adds space between inputs */
+  padding: 0.75rem;
+  width: 100%;
+  max-width: 500px; /* Ensures inputs are not too wide */
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  transition: border-color 0.3s;
+  background-color: #f8fafc; /* Light background for inputs */
+  color: #333; /* Dark text for contrast */
+}
+
+input:focus,
+textarea:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.2);
+}
+
+label {
+  display: block;
+  text-align: left;
+  font-weight: 600;
+  margin-bottom: 0.75rem; /* Zväčšený priestor medzi label a input */
+  color: #333;
+  font-size: 1rem;
+}
+
+input, textarea {
+  margin-bottom: 1.25rem; /* Zväčšený odstup medzi poliami */
+}
+
+
+button {
+  padding: 1rem 2rem;
+  border-radius: 1.5rem;
+  font-size: 1.125rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+  margin-top: 1rem;
+  background-color: #3b82f6; /* Default button color */
+  color: white;
+}
+
+button:hover {
+  background-color: #2563eb; /* Darker button color on hover */
+}
+
+footer {
+  background-color: #1e40af !important;
+  color: white;
+  padding: 2rem 0;
+  margin-top: 3rem;
+  width: 100vw; /* Zabezpečí, že pätička bude mať šírku cez celý viewport */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw; /* Posunie pätičku na šírku celého viewportu */
+  margin-right: -50vw; /* Rovnako posunie pravú stranu */
+  box-sizing: border-box; /* Uistíme sa, že padding nebude ovplyvňovať šírku */
+}
+
+footer .content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 100%; /* Uistíme sa, že obsah nepresiahne šírku */
+  width: 100%;
+  padding: 0 1rem;
+  margin: 0 auto; /* Uistíme sa, že obsah pätičky bude vždy na stred */
+}
+
+footer div {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  footer .content {
+    flex-direction: column;
+    align-items: center;
   }
-  to {
-    transform: rotate(360deg);
+  footer div {
+    margin-bottom: 1rem;
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
