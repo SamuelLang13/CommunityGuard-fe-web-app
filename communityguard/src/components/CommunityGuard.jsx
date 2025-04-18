@@ -44,13 +44,19 @@ function MapSelector({ setAddress }) {
 }
 
 export default function CommunityGuard() {
-  const [address, setAddress] = useState(""); // Stav pre adresu
-  const [formType, setFormType] = useState(""); // Stav pre určenie, ktorý formulár sa má zobraziť
-  const [manualAddress, setManualAddress] = useState(""); // Stav pre manuálnu adresu
-  const [useMap, setUseMap] = useState(false); // Stav, či sa má používať mapa alebo manuálny input
+  const [address, setAddress] = useState("");
+  const [formType, setFormType] = useState("");
+  const [manualAddress, setManualAddress] = useState("");
+  const [useMap, setUseMap] = useState(false);
 
   const reportRef = useRef(null);
   const eventRef = useRef(null);
+
+  const resetLocationInputs = () => {
+    setAddress("");
+    setManualAddress("");
+    setUseMap(false);
+  };
 
   const scrollToSection = (ref) => {
     if (ref.current) {
@@ -73,13 +79,21 @@ export default function CommunityGuard() {
 
         <div className="flex flex-col md:flex-row gap-6">
           <button
-            onClick={() => { setFormType('report'); scrollToSection(reportRef); }}
+            onClick={() => {
+              resetLocationInputs();
+              setFormType("report");
+              scrollToSection(reportRef);
+            }}
             className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition"
           >
             Nahlásiť problém
           </button>
           <button
-            onClick={() => { setFormType('event'); scrollToSection(eventRef); }}
+            onClick={() => {
+              resetLocationInputs();
+              setFormType("event");
+              scrollToSection(eventRef);
+            }}
             className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition"
           >
             Vytvoriť komunitné podujatie
@@ -102,12 +116,11 @@ export default function CommunityGuard() {
                 required
                 className="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                 placeholder="Zadajte predmet problému"
-                style={{ marginBottom: "1rem" }} // Margin medzi label a input
               />
             </div>
             <div className="space-y-2">
               <label htmlFor="details" className="block text-sm font-medium text-gray-700 mb-2">
-                Detaily
+                Popis
               </label>
               <textarea
                 id="details"
@@ -115,12 +128,11 @@ export default function CommunityGuard() {
                 rows="4"
                 className="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                 placeholder="Popíšte problém"
-                style={{ marginBottom: "1rem" }} // Margin medzi label a textarea
               />
             </div>
             <div className="space-y-2">
               <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-2">
-                Adresa
+                Lokalita
               </label>
               <div className="flex items-center mb-4">
                 <input
@@ -130,7 +142,6 @@ export default function CommunityGuard() {
                   onChange={(e) => setManualAddress(e.target.value)}
                   className="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                   placeholder="Zadajte adresu alebo kliknite na mapu"
-                  style={{ marginBottom: "1rem" }} // Margin medzi label a input
                 />
                 <button
                   type="button"
@@ -165,7 +176,6 @@ export default function CommunityGuard() {
                 id="eventType"
                 required
                 className="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                style={{ marginBottom: "1rem" }} // Margin medzi label a select
               >
                 <option value="cleanup">Čistenie</option>
                 <option value="repair">Oprava</option>
@@ -182,24 +192,34 @@ export default function CommunityGuard() {
                 rows="4"
                 className="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                 placeholder="Popíšte podujatie"
-                style={{ marginBottom: "1rem" }} // Margin medzi label a textarea
               />
             </div>
-            <div className="space-y-2">
-              <label htmlFor="duration" className="block text-sm font-medium text-gray-700 mb-2">
-                Dátum a čas
-              </label>
-              <input
-                type="datetime-local"
-                id="duration"
-                required
-                className="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                style={{ marginBottom: "1rem" }} // Margin medzi label a input
-              />
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label htmlFor="startDateTime" className="block text-sm font-medium text-gray-700 mb-2">
+                  Začiatok podujatia
+                </label>
+                <input
+                  type="datetime-local"
+                  id="startDateTime"
+                  required
+                  className="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="endDateTime" className="block text-sm font-medium text-gray-700 mb-2">
+                  Koniec podujatia (voliteľné)
+                </label>
+                <input
+                  type="datetime-local"
+                  id="endDateTime"
+                  className="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
+                />
+              </div>
             </div>
             <div className="space-y-2">
               <label htmlFor="eventAddress" className="block text-sm font-medium text-gray-700 mb-2">
-                Adresa
+                Lokalita
               </label>
               <div className="flex items-center mb-4">
                 <input
@@ -209,7 +229,6 @@ export default function CommunityGuard() {
                   onChange={(e) => setManualAddress(e.target.value)}
                   className="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                   placeholder="Zadajte adresu alebo kliknite na mapu"
-                  style={{ marginBottom: "1rem" }} // Margin medzi label a input
                 />
                 <button
                   type="button"

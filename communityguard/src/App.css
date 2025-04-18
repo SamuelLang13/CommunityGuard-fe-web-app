@@ -35,17 +35,12 @@ textarea:focus {
 
 label {
   display: block;
-  text-align: left;
+  text-align: center;
   font-weight: 600;
-  margin-bottom: 0.75rem; /* Zväčšený priestor medzi label a input */
-  color: #333;
+  margin-bottom: 0.5rem;
+  color: white; /* Darker text for labels */
   font-size: 1rem;
 }
-
-input, textarea {
-  margin-bottom: 1.25rem; /* Zväčšený odstup medzi poliami */
-}
-
 
 button {
   padding: 1rem 2rem;
