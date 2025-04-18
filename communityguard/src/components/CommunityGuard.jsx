@@ -51,6 +51,7 @@ export default function CommunityGuard() {
 
   const reportRef = useRef(null);
   const eventRef = useRef(null);
+  const landingRef = useRef(null);
 
   const resetLocationInputs = () => {
     setAddress("");
@@ -71,33 +72,58 @@ export default function CommunityGuard() {
 
   return (
     <>
-      <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-gray-100">
+      <div ref={landingRef} className="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-gray-100">
         <h1 className="text-4xl md:text-5xl font-bold text-blue-700 mb-6">CommunityGuard</h1>
         <p className="text-lg md:text-xl text-gray-700 mb-10 max-w-2xl">
           Zapoj sa do ochrany svojho okolia. Nahlasuj problémy alebo organizuj komunitné podujatia.
         </p>
 
         <div className="flex flex-col md:flex-row gap-6">
-          <button
-            onClick={() => {
-              resetLocationInputs();
-              setFormType("report");
-              scrollToSection(reportRef);
-            }}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition"
-          >
-            Nahlásiť problém
-          </button>
-          <button
-            onClick={() => {
-              resetLocationInputs();
-              setFormType("event");
-              scrollToSection(eventRef);
-            }}
-            className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition"
-          >
-            Vytvoriť komunitné podujatie
-          </button>
+          {formType === "report" ? (
+            <button
+              onClick={() => {
+                setFormType("");
+                scrollToSection(landingRef);
+              }}
+              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 px-6 rounded-lg shadow-lg transition"
+            >
+              Späť
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                resetLocationInputs();
+                setFormType("report");
+                scrollToSection(reportRef);
+              }}
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition"
+            >
+              Nahlásiť problém
+            </button>
+          )}
+
+          {formType === "event" ? (
+            <button
+              onClick={() => {
+                setFormType("");
+                scrollToSection(landingRef);
+              }}
+              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 px-6 rounded-lg shadow-lg transition"
+            >
+              Späť
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                resetLocationInputs();
+                setFormType("event");
+                scrollToSection(eventRef);
+              }}
+              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition"
+            >
+              Vytvoriť komunitné podujatie
+            </button>
+          )}
         </div>
       </div>
 
