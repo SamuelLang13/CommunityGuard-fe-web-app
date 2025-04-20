@@ -65,6 +65,31 @@ communityguard/
 ├── README.md
 └── ...
 
+## Forkovanie projektu
+
+Chceš prispieť? Môžeš projekt jednoducho *forknúť* a začať vývoj vo svojej vlastnej vetve:
+
+1. Klikni na tlačidlo **Fork** v pravom hornom rohu GitHub repozitára
+2. Klonuj si svoj fork:
+
+```bash
+git clone https://github.com/tvoje-uzivatelske-meno/communityguard.git
+```
+
+3. Vytvor si novú vetvu:
+```bash
+git checkout -b feature/moje-zmeny
+```
+
+4. Pošli Pull Request späť do originálneho repozitára 🎉
+
+## Pripravovaný backend
+
+- Node.js / Express alebo Fastify
+- MongoDB alebo PostgreSQL
+- JWT autentifikácia
+- Swagger (OpenAPI 3.0)
+
 👥 Autori
 
 Samuel Lang
